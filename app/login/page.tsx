@@ -26,7 +26,8 @@ export default function Login(){
             const response = await axios.post('../../api/user/login', user);
             console.log("response data", response);
             notify1();
-            router.push('/');
+            const userName = response.data.message.user;
+            router.push(`/${userName}`);
 
         }catch(error:any){
             notify();

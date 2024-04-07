@@ -1,5 +1,5 @@
 "use client"
-import Item from "./components/item"
+import Item from "../components/item"
 // import tokenData from "@/helper/getdatafromtoken";
 import React from "react";
 import axios from "axios";
