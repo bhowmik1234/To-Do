@@ -76,24 +76,24 @@ export default function Home({ params }: any) {
       <div className="flex flex-col w-3/4">
         <button
           onClick={logout}
-          className="outline-none border-2 w-20 p-2 rounded-md m-2 hover:border-amber-500 hover:text-amber-500"
+          className="outline-none border-[1px] border-gray-500 text-gray-400 text-sm w-20 p-2 rounded-md m-2 hover:border-amber-500 hover:text-amber-500"
         >
           Log out
         </button>
-        <div className="flex justify-center w-full gap-2.5 h-14 mb-4">
+        <div className="flex justify-center w-full gap-2.5 h-12 mb-4">
           <input
             onChange={(e) =>{
               setValue(e.target.value);
             }}
             name="content"
             placeholder="Enter to do item"
-            className="p-2 bg-zinc-800 border-amber-900 outline-none w-full rounded-md text-gray-400"
+            className="px-2 text-sm bg-zinc-800 border-amber-900 outline-none w-full rounded-md text-gray-400"
           />
-          <button onClick={add} className="px-6 rounded-md bg-amber-600 hover:bg-amber-700">
+          <button onClick={add} className="px-10 py-0 rounded-md bg-amber-700 text-sm hover:bg-amber-600 text-stone-200">
             Add
           </button>
         </div>
-        <button onClick={refresh} className="mb-12 outline-none border-2 rounded-md text-sm w-20 hover:border-amber-500 hover:text-amber-500">Refresh</button>
+        <button onClick={refresh} className="mb-12 outline-none border-[1px] border-gray-500 text-gray-500 rounded-md text-sm w-20 hover:border-amber-500 hover:text-amber-500">Refresh</button>
         {
           data.length > 0 ? (
             data.map((elem, index) => (

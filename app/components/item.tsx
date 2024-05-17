@@ -21,13 +21,13 @@ const Item: React.FC<ItemProps> = ({ cct, id}) => {
   }
 
   return (
-    <div className="flex bg-gray-800 p-2 mb-2 rounded-md">
-      <div className="w-full text-gray-300 p-2">
+    <div className="flex bg-gray-800 py-2 px-[.5px] mb-2 rounded-md">
+      <div className="w-full text-gray-300 p-2 text-sm h-8 text-stone-300">
         {cct}
       </div>
       <div className="p-2" onClick={deleteItem}>
         <MdDelete 
-          className="text-xl text-amber-400"
+          className="text-xl text-amber-400 hover:text-amber-600"
         /> 
       </div>
     </div>
