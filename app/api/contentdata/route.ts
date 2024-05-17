@@ -10,7 +10,12 @@ export async function GET(request: NextRequest){
         const username = params.get("name");
         console.log(`${username} ${typeof username}`)
         console.log("data part");
-        const user = await User.findOne({username:"Bhowmik"});
+        if (username === null) {
+            return NextResponse.json({
+                message: "username is required"
+            });
+        }
+        const user = await User.findOne({username:username});
         if(!user) {
             return NextResponse.json({
                 message:"user not found"
