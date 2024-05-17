@@ -41,7 +41,7 @@ export default function Home({ params }: any) {
 
     fetchContentData();
     return () =>unsubscribe();
-  }, [currUser]);
+  }, [currUser, userName]);
 
   const refresh = ()=>{
     window.location.reload()

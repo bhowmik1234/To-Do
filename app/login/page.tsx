@@ -67,7 +67,8 @@ export default function Login(){
             const a = await signInWithPopup(auth, provider);
             console.log(a);
             console.log(1);
-            const b = await a._tokenResponse.firstName;
+            const displayName = a.user.displayName || '';
+            const b = displayName.split(' ')[0];
             const res = await axios.post('../../api/userdetail', {username:b});
             console.log(res);
             if(res.data.message == "user found"){router.push(`/${b}`);}

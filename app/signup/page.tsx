@@ -77,14 +77,16 @@ export default function SignUpPage () {
             try{
                 const a = await signInWithPopup(auth, provider);
                 console.log(a.user.displayName);
+                const displayName = a.user.displayName || '';
+                const firstName = displayName.split(' ')[0];
                 const currUser = {
-                    username: a._tokenResponse.firstName,
-                    email: a._tokenResponse.email,
+                    username: firstName,
+                    email: a.user.email,
                     password: ""
                 }
                 const response = await axios.post("../../api/user/signup", currUser);
                 console.log("response ddata: ", response);
-                router.push(`/${a._tokenResponse.firstName}`);
+                router.push(`/${firstName}`);
             }catch(error:any){
                 console.log("for signpup: ", error.message);
             }
