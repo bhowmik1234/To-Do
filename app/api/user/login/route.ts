@@ -12,7 +12,7 @@ export async function POST(request: NextRequest){
         const {email, password} = reqBody;
 
         const user = await User.findOne({email});
-
+        console.log(user);
         if(!user)
         {
             return NextResponse.json({
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest){
         const token = await jwt.sign(tokenData, process.env.TOKEN_SECRETS!, {expiresIn:"1h"});
         const response = NextResponse.json({
             message: {
-                user: user.username,
+                user,
                 "login": "login successfull",
             },
             success: true,

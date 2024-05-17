@@ -6,6 +6,10 @@ import {useRouter} from "next/navigation";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 
+import { getAuth, signInWithPopup } from "firebase/auth";
+import app from "../config";
+import {  GoogleAuthProvider } from 'firebase/auth';
+
 
 const notify = () => toast.error('Sign Up unSuccessfull.');
 const notify1 = () => toast.success('Sign up Successfully.');
@@ -15,6 +19,7 @@ const notify4 = () => toast.error('Invalid password type');
 export default function SignUpPage () {
 
         const router = useRouter();
+        const [User, setUSer] = React.useState<string | null>("");
         const[user, setUser] = React.useState({
             username:"",
             email:"",
@@ -49,6 +54,11 @@ export default function SignUpPage () {
         }
 
         useEffect(() =>{
+            const auth = getAuth(app);
+            const unsubscribe = auth.onAuthStateChanged((currUser)=>{
+                if(currUser){setUSer(currUser.email);}
+                else{setUSer(null);}
+            })
             console.log(process.env.MONGOOSE_URL);
             if(user.username.length > 0 && user.password.length > 0 && user.email.length > 0)
             {
@@ -58,7 +68,27 @@ export default function SignUpPage () {
             {
                 setButtonDisable(true);
             }
+            return () =>unsubscribe();
         }, [user]);
+
+        const signWithGoogle = async() =>{
+            const auth = getAuth(app);
+            const provider = new GoogleAuthProvider();
+            try{
+                const a = await signInWithPopup(auth, provider);
+                console.log(a.user.displayName);
+                const currUser = {
+                    username: a._tokenResponse.firstName,
+                    email: a._tokenResponse.email,
+                    password: ""
+                }
+                const response = await axios.post("../../api/user/signup", currUser);
+                console.log("response ddata: ", response);
+                router.push(`/${a._tokenResponse.firstName}`);
+            }catch(error:any){
+                console.log("for signpup: ", error.message);
+            }
+        }
 
         return (
             <div className="flex flex-col items-center justify-center min-h-screen ">
@@ -95,6 +125,7 @@ export default function SignUpPage () {
                     /> 
                     <button onClick={onSignUp} className="mt-5 bg-blue-600 px-10 py-3 rounded-lg hover:bg-blue-700">{buttonDisable ? "No sign up": "Sign Up"}</button> 
                     <Toaster position="top-center" reverseOrder={false}/>
+                    <button onClick={signWithGoogle} className="border-2 rounded-md text-sm p-2 text-amber-500 hover:text-blue-600 mt-2"> Signup with Google </button>
                     <Link href="/login" className="text-purple-400 mt-1 flex justify-center hover:text-cyan-300">Go to Login page</Link>
                 </div>
             </div>

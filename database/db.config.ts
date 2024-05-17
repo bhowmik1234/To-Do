@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 
 export default async function connect() {
     try {
-        await mongoose.connect("mongodb+srv://test:123@cluster0.gwqg2c4.mongodb.net/");
+        // await mongoose.connect("mongodb+srv://test:123@cluster0.gwqg2c4.mongodb.net/");
+        await mongoose.connect(process.env.MONGOOSE_URL!);
         const connection = mongoose.connection;
 
         connection.on('connected', () => {
