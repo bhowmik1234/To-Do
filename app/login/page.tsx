@@ -151,7 +151,7 @@ export default function Login() {
             <button onClick={buttonDisable ? undefined : onLogin} className={`mt-5 w-full px-10 py-2 text-sm rounded-lg bg-emereal-700 ${buttonDisable ? 'bg-emerald-700 cursor-not-allowed' : 'bg-emerald-700 hover:bg-blue-700'} `}>Login</button>
             <Toaster position="top-center" reverseOrder={false}/>
             <p className="text-xs text-gray-300 mt-2">or</p>
-            <button onClick={signWithGoogle} className="text-[1.5rem] text-sm p-2"> <FcGoogle /> </button>
+            <button onClick={signWithGoogle} className="text-[20px] text-sm p-2"> <FcGoogle /> </button>
             <Link href="/signup" className=" text-xs text-green-600 mt-1 flex justify-center hover:text-violet-400">Go to SignUp page</Link>
           </div>
         </div>

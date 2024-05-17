@@ -190,7 +190,7 @@ export default function SignUpPage() {
             <p className="text-xs text-gray-300 mt-2">or</p>
             <button
               onClick={signWithGoogle}
-              className="text-[1.5rem] text-sm p-2"
+              className="text-[20px] text-sm p-2"
             >
               {" "}
               <FcGoogle />{" "}
