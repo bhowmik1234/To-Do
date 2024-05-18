@@ -75,6 +75,15 @@ export default function Home({ params }: any) {
 
   }
 
+  const deleteItem = async (id: string) => {
+    try {
+      // await axios.get('/api/contentdelete', { params: { id: id } });
+      setData(prevData => prevData.filter(item => item.id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <main className="flex p-10 justify-center">
       <div className="flex flex-col w-3/4">
@@ -90,8 +99,9 @@ export default function Home({ params }: any) {
               setValue(e.target.value);
             }}
             name="content"
+            value={value}
             placeholder="Enter to do item"
-            className="px-2 text-sm bg-zinc-800 border-amber-900 outline-none w-full rounded-md text-gray-400"
+            className="px-2 text-sm bg-zinc-800 border-amber-90ccc0 outline-none w-full rounded-md text-gray-400"
           />
           <button onClick={add} className="px-10 py-0 rounded-md bg-amber-700 text-sm hover:bg-amber-600 text-stone-200">
             Add
@@ -101,7 +111,7 @@ export default function Home({ params }: any) {
         {
           data.length > 0 ? (
             data.map((elem, index) => (
-              <Item key={index} id={elem.id} cct={elem.content} />
+              <Item key={index} id={elem.id} cct={elem.content} onDelete={deleteItem}/>
             ))
           ) : (
             <p>No data available</p>

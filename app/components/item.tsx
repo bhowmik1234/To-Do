@@ -5,16 +5,18 @@ import axios from "axios";
 interface ItemProps {
   cct: string; 
   id: string;
+  onDelete: (id: string) => void;
 }
 
 
-const Item: React.FC<ItemProps> = ({ cct, id}) => {
+const Item: React.FC<ItemProps> = ({ cct, id, onDelete}) => {
   const deleteItem = async()=>{
       console.log(id);
       try {
         const res = await axios.get('/api/contentdelete', {params:{id:id}});
         console.log(res);
-        window.location.reload();
+        onDelete(id);
+        // window.location.reload();
       } catch (error) {
         console.log(error);
       }
