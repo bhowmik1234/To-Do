@@ -65,7 +65,8 @@ export default function Home({ params }: any) {
     try {
       const res = await axios.post('/api/contentupload', cont);
       console.log(res);
-      const newItem = { id: res.data._id, content: value };
+      const newItem = { id: res.data.data._id, content: value };
+      console.log(newItem);
       setData(prevData => [newItem, ...prevData,]);
       setValue(''); // Clear the input field
     } catch (error) {

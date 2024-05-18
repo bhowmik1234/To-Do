@@ -30,7 +30,7 @@ export async function POST(request: NextRequest)
         return NextResponse.json({
             message: "content addes successfully",
             success: true,
-            data: reqBody
+            data: savedContent
         })
     }
     catch(error:any)
